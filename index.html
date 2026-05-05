@@ -38,13 +38,7 @@
         <label for="recipe-search">キーワード検索</label>
         <input id="recipe-search" type="search" placeholder="例: 風邪、疲れ、しょうが、胃">
       </div>
-      <div class="filter-group" aria-label="体調で絞り込み">
-        <button class="filter-button active" type="button" data-filter="all">すべて</button>
-        <button class="filter-button" type="button" data-filter="tired">疲れている</button>
-        <button class="filter-button" type="button" data-filter="cold">風邪っぽい</button>
-        <button class="filter-button" type="button" data-filter="stomach">胃にやさしい</button>
-        <button class="filter-button" type="button" data-filter="beauty">整えたい</button>
-      </div>
+      <div id="filter-group" class="filter-group" aria-label="タグで絞り込み"></div>
     </section>
 
     <section class="content-grid">

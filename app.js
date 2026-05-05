@@ -347,7 +347,7 @@ const recipeList = document.querySelector("#recipe-list");
 const emptyMessage = document.querySelector("#empty-message");
 const resultCount = document.querySelector("#result-count");
 const searchInput = document.querySelector("#recipe-search");
-const filterButtons = document.querySelectorAll(".filter-button");
+const filterGroup = document.querySelector("#filter-group");
 const savedList = document.querySelector("#saved-list");
 const savedEmpty = document.querySelector("#saved-empty");
 const savedDetail = document.querySelector("#saved-detail");
@@ -361,7 +361,7 @@ const symptomHint = document.querySelector("#symptom-hint");
 
 const storageKey = "healthy-recipe-saved";
 const todayRecipe = recipes[new Date().getDate() % recipes.length];
-let activeFilter = "all";
+let activeFilter = { type: "all", value: "all" };
 let recommendedRecipeIds = null;
 let savedRecipeIds = loadSavedRecipes();
 
@@ -377,11 +377,47 @@ function saveRecipes() {
   localStorage.setItem(storageKey, JSON.stringify(savedRecipeIds));
 }
 
+function getAllFilterItems() {
+  const categoryItems = Object.entries(categoryLabels).map(([value, label]) => ({ type: "category", value, label }));
+  const tagItems = [...new Set(recipes.flatMap((recipe) => recipe.tags))]
+    .sort((a, b) => a.localeCompare(b, "ja"))
+    .map((tag) => ({ type: "tag", value: tag, label: tag }));
+  return [...categoryItems, ...tagItems];
+}
+
+function isActiveFilter(item) {
+  return activeFilter.type === item.type && activeFilter.value === item.value;
+}
+
+function renderFilterButtons() {
+  filterGroup.innerHTML = "";
+  getAllFilterItems().forEach((item) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = isActiveFilter(item) ? "filter-button active" : "filter-button";
+    button.dataset.filterType = item.type;
+    button.dataset.filterValue = item.value;
+    button.textContent = item.label;
+    button.addEventListener("click", () => {
+      activeFilter = { type: item.type, value: item.value };
+      recommendedRecipeIds = null;
+      symptomHint.textContent = item.type === "tag" ? `${item.label}タグで絞り込んでいます。` : "体調カテゴリで絞り込んでいます。";
+      renderFilterButtons();
+      renderRecipes();
+    });
+    filterGroup.append(button);
+  });
+}
+
 function getFilteredRecipes() {
   const keyword = searchInput.value.trim().toLowerCase();
 
   return recipes.filter((recipe) => {
-    const matchesFilter = activeFilter === "all" || recipe.category === activeFilter;
+    const matchesFilter =
+      activeFilter.type === "all" ||
+      (activeFilter.type === "category" && activeFilter.value === "all") ||
+      (activeFilter.type === "category" && recipe.category === activeFilter.value) ||
+      (activeFilter.type === "tag" && recipe.tags.includes(activeFilter.value));
     const matchesSymptoms = !recommendedRecipeIds || recommendedRecipeIds.includes(recipe.id);
     const searchableText = [
       recipe.title,
@@ -396,7 +432,6 @@ function getFilteredRecipes() {
     return matchesFilter && matchesSymptoms && searchableText.includes(keyword);
   });
 }
-
 function renderRecipes() {
   const filteredRecipes = getFilteredRecipes();
   recipeList.innerHTML = "";
@@ -557,25 +592,13 @@ function recommendFromSymptoms() {
   }
 
   recommendedRecipeIds = [...new Set(matchedRules.flatMap((rule) => rule.recipeIds))];
-  activeFilter = "all";
+  activeFilter = { type: "category", value: "all" };
   searchInput.value = "";
-  filterButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.filter === "all");
-  });
+  renderFilterButtons();
   symptomHint.textContent = `${matchedRules.map((rule) => rule.label).join("・")}に合いそうなレシピを表示しています。`;
   renderRecipes();
 }
 
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    activeFilter = button.dataset.filter;
-    recommendedRecipeIds = null;
-    symptomHint.textContent = "体調カテゴリで絞り込んでいます。";
-    filterButtons.forEach((current) => current.classList.remove("active"));
-    button.classList.add("active");
-    renderRecipes();
-  });
-});
 
 searchInput.addEventListener("input", () => {
   recommendedRecipeIds = null;

@@ -163,8 +163,8 @@ textarea {
 }
 
 .filter-button {
-  min-height: 42px;
-  padding: 10px 14px;
+  min-height: 38px;
+  padding: 8px 12px;
   background: var(--surface-strong);
   border: 1px solid var(--line);
   color: var(--text);
