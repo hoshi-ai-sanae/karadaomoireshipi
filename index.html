@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>からだ想いレシピ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="app-title">
+      <div>
+        <p class="eyebrow">Healthy Recipe Guide</p>
+        <h1 id="app-title">からだ想いレシピ</h1>
+        <p class="lead">疲れている日、風邪っぽい日、胃を休めたい日。今の体調に合わせて、やさしい料理を選べるアプリです。</p>
+      </div>
+      <div class="hero-note">
+        <span>今日のおすすめ</span>
+        <button id="today-pick" class="today-button" type="button">しょうが鶏雑炊</button>
+        <p id="today-summary">体調に合わせた本日の一皿です。</p>
+      </div>
+    </section>
+
+    <section class="symptom-advisor" aria-label="症状からおすすめを見る">
+      <div class="symptom-box">
+        <label for="symptom-input">今の状態を入力</label>
+        <textarea id="symptom-input" rows="3" placeholder="例: 咳が出る、のどが痛い、疲れて食欲がない"></textarea>
+      </div>
+      <div class="symptom-actions">
+        <button id="symptom-button" type="button">症状からおすすめを見る</button>
+        <p id="symptom-hint">症状や気分を入れると、近いレシピを表示します。</p>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="レシピを探す">
+      <div class="search-box">
+        <label for="recipe-search">キーワード検索</label>
+        <input id="recipe-search" type="search" placeholder="例: 風邪、疲れ、しょうが、胃">
+      </div>
+      <div class="filter-group" aria-label="体調で絞り込み">
+        <button class="filter-button active" type="button" data-filter="all">すべて</button>
+        <button class="filter-button" type="button" data-filter="tired">疲れている</button>
+        <button class="filter-button" type="button" data-filter="cold">風邪っぽい</button>
+        <button class="filter-button" type="button" data-filter="stomach">胃にやさしい</button>
+        <button class="filter-button" type="button" data-filter="beauty">整えたい</button>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <section class="recipes-panel" aria-labelledby="recipes-title">
+        <div class="panel-heading">
+          <h2 id="recipes-title">おすすめレシピ</h2>
+          <p id="result-count">0件</p>
+        </div>
+        <div id="recipe-list" class="recipe-list"></div>
+        <p id="empty-message" class="empty-message">条件に合うレシピがありません。</p>
+      </section>
+
+      <aside class="saved-panel" aria-labelledby="saved-title">
+        <div class="panel-heading">
+          <h2 id="saved-title">作りたいリスト</h2>
+          <button id="clear-saved" type="button" class="secondary">クリア</button>
+        </div>
+        <ul id="saved-list" class="saved-list"></ul>
+        <p id="saved-empty" class="empty-message">気になるレシピを保存できます。</p>
+        <div id="saved-detail" class="recipe-focus" aria-live="polite">
+          <p class="empty-message">今日のおすすめや保存したメニューを押すと、材料と作り方がここに出ます。</p>
+        </div>
+        <p class="notice">体調が強くつらい時や症状が長引く時は、無理せず医療機関に相談してください。</p>
+      </aside>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
