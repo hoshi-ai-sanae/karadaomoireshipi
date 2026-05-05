@@ -336,6 +336,18 @@ textarea {
 }
 
 
+
+.today-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin: 12px 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background-color: var(--accent-soft);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .today-button {
   display: block;
   width: 100%;

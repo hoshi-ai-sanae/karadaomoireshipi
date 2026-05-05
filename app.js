@@ -146,6 +146,7 @@ const savedEmpty = document.querySelector("#saved-empty");
 const savedDetail = document.querySelector("#saved-detail");
 const clearSavedButton = document.querySelector("#clear-saved");
 const todayPick = document.querySelector("#today-pick");
+const todayImage = document.querySelector("#today-image");
 const todaySummary = document.querySelector("#today-summary");
 const symptomInput = document.querySelector("#symptom-input");
 const symptomButton = document.querySelector("#symptom-button");
@@ -399,6 +400,8 @@ clearSavedButton.addEventListener("click", () => {
 
 todayPick.addEventListener("click", () => showRecipeDetail(todayRecipe, "今日のおすすめ"));
 todayPick.textContent = todayRecipe.title;
+todayImage.style.backgroundImage = `url("${todayRecipe.image}")`;
+todayImage.setAttribute("aria-label", `${todayRecipe.title}の写真`);
 todaySummary.textContent = todayRecipe.summary;
 renderRecipes();
 renderSavedRecipes();
