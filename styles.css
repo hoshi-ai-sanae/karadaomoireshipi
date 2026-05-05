@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: light;
   --bg: #f7f2ea;
   --surface: #fffdf8;
@@ -22,6 +22,11 @@ body {
   font-family: "Yu Gothic", "Meiryo", system-ui, sans-serif;
   background: linear-gradient(135deg, rgba(63, 125, 91, 0.1), transparent 34%), var(--bg);
   color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.6;
 }
 
 button, input, textarea { font: inherit; }
@@ -204,6 +209,7 @@ textarea {
   background: var(--surface-strong);
 }
 
+
 .recipe-image {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -250,6 +256,11 @@ textarea {
   gap: 8px;
   margin: 14px 0;
   color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.6;
 }
 
 .recipe-detail div {
@@ -322,8 +333,8 @@ textarea {
 
   .hero, .symptom-advisor, .toolbar, .recipes-panel, .saved-panel { padding: 18px; }
   .filter-button { flex: 1 1 140px; }
-  .symptom-actions { grid-template-columns: 1fr; }
 }
+
 
 .today-button {
   display: block;
@@ -395,3 +406,9 @@ textarea {
   color: var(--text);
   line-height: 1.7;
 }
+
+
+
+
+
+
