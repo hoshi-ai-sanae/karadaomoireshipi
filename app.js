@@ -8,7 +8,8 @@ const recipes = [
     ingredients: "ごはん、鶏ささみ、卵、しょうが、長ねぎ、だし",
     steps: "だしで鶏肉を煮て、ごはんとしょうがを加え、最後に溶き卵を回し入れます。",
     point: "熱すぎない温度でゆっくり食べると、のどにもやさしいです。",
-    image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "0% 0%",
     imageAlt: "温かい雑炊のイメージ",
   },
   {
@@ -20,7 +21,8 @@ const recipes = [
     ingredients: "鮭、にんじん、大根、じゃがいも、しめじ、みそ",
     steps: "根菜をやわらかく煮て、鮭としめじを加え、火を止める直前にみそを溶きます。",
     point: "ごはんを添えれば、無理なく一食になります。",
-    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "33.333% 0%",
     imageAlt: "具だくさんの汁物のイメージ",
   },
   {
@@ -32,7 +34,8 @@ const recipes = [
     ingredients: "豆腐、卵、片栗粉、鶏がらスープ、青ねぎ",
     steps: "スープを温めて豆腐を入れ、水溶き片栗粉でとろみをつけてから卵を加えます。",
     point: "刺激が気になる時は、こしょうやラー油は控えめにします。",
-    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "66.666% 0%",
     imageAlt: "やさしいスープのイメージ",
   },
   {
@@ -44,7 +47,8 @@ const recipes = [
     ingredients: "ごはん、小松菜、白ごま、しらす、しょうゆ",
     steps: "刻んだ小松菜を炒め、しらすとごまを混ぜ、ごはんに合わせて握ります。",
     point: "朝作っておくと、食べそびれ防止にもなります。",
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "100% 0%",
     imageAlt: "おにぎりやごはん料理のイメージ",
   },
   {
@@ -56,7 +60,8 @@ const recipes = [
     ingredients: "りんご、プレーンヨーグルト、はちみつ、きなこ",
     steps: "りんごを小さく切り、ヨーグルト、きなこ、少量のはちみつをかけます。",
     point: "小さなお子さんや咳が強い時は、はちみつの扱いに注意してください。",
-    image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "0% 100%",
     imageAlt: "りんごとヨーグルトの朝食イメージ",
   },
   {
@@ -68,7 +73,8 @@ const recipes = [
     ingredients: "うどん、白菜、にんじん、卵、だし、しょうゆ",
     steps: "野菜をだしでくたっとするまで煮て、うどんを加え、卵で仕上げます。",
     point: "味は薄めにして、食べながら調整すると体に入りやすいです。",
-    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "33.333% 100%",
     imageAlt: "温かいうどんのイメージ",
   },
   {
@@ -80,7 +86,8 @@ const recipes = [
     ingredients: "鶏もも肉、トマト缶、玉ねぎ、キャベツ、にんにく少量",
     steps: "具材を炒めてトマト缶と水を加え、やわらかくなるまで煮込みます。",
     point: "疲れが強い日は、にんにくを抜いて軽い味にしてもおいしいです。",
-    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "66.666% 100%",
     imageAlt: "野菜たっぷり料理のイメージ",
   },
   {
@@ -92,7 +99,8 @@ const recipes = [
     ingredients: "バナナ、無調整豆乳、ヨーグルト、すりごま",
     steps: "材料をミキサーでなめらかにします。冷えが気になる時は常温に近づけます。",
     point: "冷たいものがつらい時は、無理に飲まず温かいスープを選びます。",
-    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=900&q=80",
+    image: "assets/recipes/recipe-sprite.jpg.b64",
+    imagePosition: "100% 100%",
     imageAlt: "バナナスムージーのイメージ",
   },
 ];
@@ -191,11 +199,7 @@ function renderRecipes() {
     const card = document.createElement("article");
     card.className = "recipe-card";
 
-    const image = document.createElement("img");
-    image.className = "recipe-image";
-    image.src = recipe.image;
-    image.alt = recipe.imageAlt;
-    image.loading = "lazy";
+    const image = createRecipeImage(recipe);
 
     const title = document.createElement("h3");
     title.textContent = recipe.title;
@@ -230,6 +234,29 @@ function renderRecipes() {
     card.append(image, title, tags, summary, detail, saveButton);
     recipeList.append(card);
   });
+}
+
+function createRecipeImage(recipe) {
+  const image = document.createElement("div");
+  image.className = "recipe-image";
+  image.setAttribute("role", "img");
+  image.setAttribute("aria-label", recipe.imageAlt);
+  image.style.backgroundPosition = recipe.imagePosition;
+
+  if (recipe.image.endsWith(".b64")) {
+    fetch(recipe.image)
+      .then((response) => response.text())
+      .then((base64) => {
+        image.style.backgroundImage = `url("data:image/jpeg;base64,${base64.trim()}")`;
+      })
+      .catch(() => {
+        image.classList.add("image-missing");
+      });
+  } else {
+    image.style.backgroundImage = `url("${recipe.image}")`;
+  }
+
+  return image;
 }
 
 function createDetail(label, text) {
