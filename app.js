@@ -81,7 +81,7 @@
     id: "chicken-tomato-stew",
     title: "鶏肉とトマトの元気スープ",
     category: "beauty",
-    tags: ["肌を整えたい", "野菜多め", "たんぱく質", "作り置き"],
+    tags: ["肌を整えたい", "野菜多め", "たんぱく質", "作り置き", "体重管理"],
     summary: "野菜不足が気になる日に。トマトの酸味で食べやすく、鶏肉で満足感もあるスープです。",
     ingredients: "鶏もも肉、トマト缶、玉ねぎ、キャベツ、にんにく少量",
     steps: "具材を炒めてトマト缶と水を加え、やわらかくなるまで煮込みます。",
@@ -120,7 +120,7 @@
     id: "pork-summer-vegetables",
     title: "豚しゃぶと夏野菜のさっぱり皿",
     category: "tired",
-    tags: ["夏バテ", "たんぱく質", "野菜多め", "10分で作れる"],
+    tags: ["夏バテ", "たんぱく質", "野菜多め", "10分で作れる", "体重管理"],
     summary: "暑さでだるい日に。豚肉と夏野菜をさっぱり食べられる、満足感のある主菜です。",
     ingredients: "豚しゃぶ肉、トマト、オクラ、なす、レタス、ポン酢",
     steps: "豚肉をゆで、焼いたなす、トマト、オクラと一緒に盛り、ポン酢をかけます。",
@@ -211,7 +211,7 @@
     id: "mackerel-cabbage-mealprep",
     title: "さば缶とキャベツの作り置き煮",
     category: "beauty",
-    tags: ["作り置き", "肌を整えたい", "たんぱく質", "10分で作れる"],
+    tags: ["作り置き", "肌を整えたい", "たんぱく質", "10分で作れる", "体重管理"],
     summary: "作り置きで栄養を整えたい日に。さば缶とキャベツを使った、手軽な煮ものです。",
     ingredients: "さば水煮缶、キャベツ、しょうが、酒、しょうゆ、みりん少量",
     steps: "キャベツとさば缶を汁ごと煮て、しょうがと調味料で味を整えます。",
@@ -224,7 +224,7 @@
     id: "shio-koji-chicken-broccoli",
     title: "鶏むねとブロッコリーの塩麹蒸し",
     category: "beauty",
-    tags: ["作り置き", "肌を整えたい", "たんぱく質", "疲れている"],
+    tags: ["作り置き", "肌を整えたい", "たんぱく質", "疲れている", "体重管理"],
     summary: "体を整えたい日に。鶏むね肉とブロッコリーを蒸して、軽く食べられる作り置きおかずです。",
     ingredients: "鶏むね肉、ブロッコリー、塩麹、酒、オリーブオイル少量",
     steps: "鶏むね肉を塩麹でなじませ、ブロッコリーと一緒に蒸します。",
@@ -263,7 +263,7 @@
     id: "barley-mushroom-salad",
     title: "もち麦ときのこの作り置きサラダ",
     category: "beauty",
-    tags: ["作り置き", "肌を整えたい", "野菜多め", "整えたい"],
+    tags: ["作り置き", "肌を整えたい", "野菜多め", "整えたい", "体重管理"],
     summary: "食事のリズムを整えたい日に。もち麦ときのこで食べごたえのある作り置きサラダです。",
     ingredients: "もち麦、しめじ、まいたけ、レタス、きゅうり、オリーブオイル、酢",
     steps: "もち麦をゆで、炒めたきのこ、野菜、調味料と合わせます。",
@@ -276,7 +276,7 @@
     id: "tuna-tofu-quick-bowl",
     title: "ツナと豆腐の10分丼",
     category: "stomach",
-    tags: ["10分で作れる", "朝ごはん", "胃にやさしい", "たんぱく質"],
+    tags: ["10分で作れる", "朝ごはん", "胃にやさしい", "たんぱく質", "体重管理"],
     summary: "料理をがんばれない日に。ツナと豆腐をのせるだけで作れる、軽めの丼です。",
     ingredients: "ごはん、ツナ、豆腐、きゅうり、青ねぎ、ごま、しょうゆ",
     steps: "ごはんに豆腐、ツナ、きゅうり、青ねぎをのせ、ごまとしょうゆをかけます。",
@@ -340,6 +340,11 @@ const symptomRules = [
     label: "体を整えたい時",
     words: ["肌", "むくみ", "便秘", "野菜", "整え", "美容", "朝", "軽く"],
     recipeIds: ["apple-yogurt", "chicken-tomato-stew", "komatsuna-sesame-rice"],
+  },
+  {
+    label: "体重や中年太りが気になる時",
+    words: ["中年太り", "太り", "太る", "体重", "体型", "お腹まわり", "腹まわり", "内臓脂肪", "脂肪", "代謝", "ダイエット", "痩せ", "やせ", "むくみ", "運動不足", "更年期"],
+    recipeIds: ["barley-mushroom-salad", "shio-koji-chicken-broccoli", "chicken-tomato-stew", "tuna-tofu-quick-bowl", "pork-summer-vegetables", "mackerel-cabbage-mealprep"],
   },
 ];
 
@@ -584,9 +589,11 @@ function recommendFromSymptoms() {
   );
 
   if (matchedRules.length === 0) {
-    recommendedRecipeIds = null;
-    searchInput.value = text;
-    symptomHint.textContent = "ぴったりの症状分類は見つからなかったので、入力した言葉で検索しました。";
+    recommendedRecipeIds = ["barley-mushroom-salad", "shio-koji-chicken-broccoli", "chicken-tomato-stew", "tuna-tofu-quick-bowl", "pumpkin-bean-soup", "apple-yogurt"];
+    activeFilter = { type: "category", value: "all" };
+    searchInput.value = "";
+    renderFilterButtons();
+    symptomHint.textContent = "ぴったりの分類は見つからなかったので、体を整えたい時に選びやすいレシピを表示しています。";
     renderRecipes();
     return;
   }
